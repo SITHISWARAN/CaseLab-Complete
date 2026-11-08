@@ -29,4 +29,8 @@ The production files are generated in `dist/`.
 - The case is fictional and intended for education only.
 - Progress is stored in the browser using local storage where implemented by the app.
 - No backend or API key is required for the included experience.
-"# CaseLab-Complete" 
+
+
+## Restarting a case
+
+Use the **Restart** control in the workspace header to clear saved answers, notes, stage progress, and begin again from the presentation. A confirmation prompt prevents accidental resets. The final assessment also includes a Restart Case action.

@@ -250,6 +250,11 @@ export default function App() {
   };
 
   const handleReset = () => {
+    const confirmed = window.confirm(
+      'Restart this case? Your current answers, notes, and assessment progress will be cleared.'
+    );
+    if (!confirmed) return;
+
     setStageIndex(0);
     setHighestStage(0);
     setNotes("");
@@ -259,7 +264,10 @@ export default function App() {
     setSelectedDiagnosis(null);
     setDiagnosticConfidence(null);
     setSelectedManagement([]);
-    setAppState('landing');
+    setMobileMenuOpen(false);
+    setMobileCoachOpen(false);
+    setAppState('workspace');
+    mainScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const advanceStage = () => {
@@ -432,6 +440,14 @@ export default function App() {
               <div className="hidden lg:flex items-center gap-2 text-xs text-[#172321] font-bold bg-[#F6F7F5] border border-[#E4E9E5] px-3 py-1.5 rounded-full">
                 <Stethoscope className="w-3.5 h-3.5 text-[#315C4B]" /> Intermediate
               </div>
+              <button
+                className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-white border border-[#E4E9E5] hover:border-[#315C4B] hover:bg-[#F6F7F5] text-[#315C4B] font-bold text-xs rounded-full transition-all shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-[#315C4B]"
+                onClick={handleReset}
+                aria-label="Restart case and clear current progress"
+                title="Restart case"
+              >
+                <RefreshCw className="w-4 h-4" /> <span>Restart</span>
+              </button>
               <button 
                 className="xl:hidden flex items-center gap-2 px-4 py-2 bg-[#F6F7F5] border border-[#E4E9E5] hover:border-[#315C4B] text-[#315C4B] font-bold text-xs rounded-full transition-all shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-[#315C4B]"
                 onClick={() => setMobileCoachOpen(true)}
@@ -1101,7 +1117,7 @@ function StageAssessment({ state, onReset }: { state: GlobalState, onReset: () =
             onClick={onReset}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#172321] text-white px-6 py-3 rounded-xl text-sm font-bold hover:bg-[#315C4B] transition-all shadow-md hover:shadow-lg outline-none focus-visible:ring-4 focus-visible:ring-[#315C4B]/50"
           >
-            <RefreshCw className="w-4 h-4" /> Start New Case
+            <RefreshCw className="w-4 h-4" /> Restart Case
           </button>
         </div>
       </div>
